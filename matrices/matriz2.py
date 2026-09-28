@@ -2,32 +2,44 @@ matriz = []
 filas = 0
 columnas = 0
 
-def pedirTamaño (i ,j):
+def pedirSize():
     global filas, columnas
-    filas = i
-    columnas = j
+    filas = int(input("Tamano de filas: "))
+    columnas = int(input("Tamano de columnas: "))
 
-pedirTamaño(3, 3) 
-print(filas, columnas)
-    
-
-def leerValor():
+def leerValor(mensaje):
     while True:
         try:
-            valor = int(input("Dime un valor numerico"))
+            valor = int(input(mensaje))
             return valor
         except ValueError:
-            print("error")
+            print("Error. Verifique que el valor sea entero")
 
-        
+def agregarElemento():
+    for i in range(filas):
+        matriz.append([])
+        for j in range(columnas):
+            dato = leerValor(f"Valor[{i+1}, {j+1}]: ")
+            matriz[i].append(dato)
 
-def agregarElemento(elemento):
- for i in range (filas):
-     matriz.append([])
-     for j in range (columnas):
-         matriz[i].append(int(input(f"valor({i}, {j})")))
+def menu():
+    print("""
+1. Asignar tamano
+2. Agregar elemento
+3. Salir
+""")
+    op = leerValor("Ingrese una opcion: ")
+    return op
 
+def main():
+    while True:
+        op = menu()
+        if op == 1:
+            pedirSize()
+        elif op == 2:
+            agregarElemento()
+        elif op == 3:
+            print("Adios")
+            break
 
-pedirTamaño(2, 2)
-print(filas,  columnas )
-agregarElemento()
+main()
